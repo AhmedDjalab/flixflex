@@ -1,17 +1,9 @@
-import React, { useEffect } from "react";
-import { Routes, Route, Outlet, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  auth,
-  logInWithEmailAndPassword,
-  signInWithGoogle,
-  logout,
-} from "../services/firebase";
+import { auth, logout } from "../services/firebase";
+import Avatar from "./Avatar";
 function Header() {
-  const [user, loading, error] = useAuthState(auth);
-  useEffect(() => {
-    console.log("🚀 ~ file: Header.tsx:11 ~ Header ~ user", user);
-  }, [user]);
+  const [user] = useAuthState(auth);
 
   return (
     <div
@@ -38,9 +30,12 @@ function Header() {
           </NavLink>
         </div>
       ) : (
-        <p onClick={logout} className="hover:text-white">
-          Signout
-        </p>
+        <div className="flex justify-end flex-1 gap-6">
+          <Avatar email={user.email!} />
+          <NavLink onClick={logout} className="hover:text-white" to="/">
+            Signout
+          </NavLink>
+        </div>
       )}
     </div>
   );

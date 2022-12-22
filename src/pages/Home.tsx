@@ -1,7 +1,14 @@
 import React from "react";
+import Card from "../components/Card";
 
 function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      {/* Trending Movies   */}
+      <Card size="sm" />
+      {/* Trending Series  */}
+    </div>
+  );
 }
 
 export default Home;
