@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .textfield {
+
+    
+        @apply w-[21.8rem] h-[4rem] px-2 text-lg bg-bodyColor border border-2
+        border-white rounded-lg
+      }
+
+ }

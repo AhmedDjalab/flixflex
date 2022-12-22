@@ -5,8 +5,8 @@ import Layout from "../components/Layout";
 import Home from "./Home";
 import Movies from "./Movies";
 import Series from "./Series";
-import Signup from "../components/Signup";
-import Login from "../components/Login";
+import Signup from "./Signup";
+import Login from "./Login";
 
 function App() {
   return (
