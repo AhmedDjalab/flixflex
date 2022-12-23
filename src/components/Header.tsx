@@ -16,7 +16,6 @@ function Header() {
         <ul className="flex gap-6 list-none ">
           <li className="hover:text-white">Movies</li>
           <li className="hover:text-white">Series</li>
-          <li className="hover:text-white">TV Shows</li>
         </ul>
       </div>
 

@@ -1,33 +1,49 @@
 import React from "react";
 import IMDBICON from "../assets/icons/imdb.png";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
+import { Result } from "../models/responses_types";
+import { API_URL, IMAGE_BASE_URL, IMAGE_SIZE } from "../constant/const";
 
-interface ICardProps {
+interface ICardProps extends Result {
   size: "md" | "sm";
 }
 
 const containerSize = {
   sm: "h-[20rem] w-[15rem]",
-  md: "h-[15rem] w-[30rem]",
+  md: "h-[20rem] w-[30rem]",
 };
 const cardTagPosition = {
   sm: "bottom-8",
   md: "bottom-0",
 };
 
-function Card({ size }: ICardProps) {
+function Card({
+  size,
+  vote_average,
+  poster_path,
+  name,
+  first_air_date,
+  release_date,
+  id,
+}: ICardProps) {
+  console.log(
+    "🚀 ~ file: Card.tsx:76 ~ first_air_date",
+    new Date(first_air_date).getFullYear(),
+    id
+  );
+
   const rating = () => {
     if (size === "md") {
-      return <h2 className="text-xl text-white "> 7.79 rating </h2>;
+      return <h2 className="text-white text-md "> {vote_average} rating </h2>;
     } else {
       return (
         <div className="absolute flex items-center justify-center gap-1 px-1 mx-2 text-white bg-black top-2 rounded-2xl ">
           <StarIcon
-            className="text-lg text-yellow-500"
+            className="text-yellow-500 text-md"
             height={15}
             width={15}
           />
-          <h2 className="text-md">7.79</h2>
+          <h2 className="text-md">{vote_average}</h2>
         </div>
       );
     }
@@ -45,7 +61,7 @@ function Card({ size }: ICardProps) {
           ${btStyle[size]}
           `}
       >
-        Watch Now
+        Watch now
       </div>
     );
   };
@@ -54,7 +70,7 @@ function Card({ size }: ICardProps) {
       {size === "sm" && rating()}
       <img
         alt="dsf"
-        src="https://i.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4"
+        src={`${IMAGE_BASE_URL + IMAGE_SIZE + poster_path}`}
         className="w-full h-full bg-cover rounded-xl"
       />
 
@@ -62,8 +78,12 @@ function Card({ size }: ICardProps) {
         className={`absolute ${cardTagPosition[size]} flex justify-between w-full p-2 `}
       >
         <div>
-          <h2 className="text-xl text-white ">The Army of dead </h2>
-          <h2 className="text-xl text-white ">2022 </h2>
+          <h2 className="text-xl font-bold text-white ">{name}</h2>
+          <h2 className="text-xl text-white ">
+            {first_air_date
+              ? new Date(first_air_date).getFullYear().toString()
+              : new Date(release_date).getFullYear().toString()}
+          </h2>
           {size === "md" ? (
             <div className="flex items-center gap-1">
               <img
