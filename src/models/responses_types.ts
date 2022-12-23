@@ -15,6 +15,7 @@ export interface Result {
   overview: string;
   poster_path: string;
   media_type: MediaType;
+  title: string;
   genre_ids: number[];
   popularity: number;
   first_air_date: Date;

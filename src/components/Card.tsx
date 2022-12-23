@@ -6,6 +6,7 @@ import { API_URL, IMAGE_BASE_URL, IMAGE_SIZE } from "../constant/const";
 
 interface ICardProps extends Result {
   size: "md" | "sm";
+  handleClickCard: (id: number) => void;
 }
 
 const containerSize = {
@@ -24,6 +25,8 @@ function Card({
   name,
   first_air_date,
   release_date,
+  handleClickCard,
+  title,
   id,
 }: ICardProps) {
   console.log(
@@ -66,7 +69,10 @@ function Card({
     );
   };
   return (
-    <div className={`${containerSize[size]} relative`}>
+    <div
+      onClick={() => handleClickCard(id)}
+      className={`${containerSize[size]} relative cursor-pointer`}
+    >
       {size === "sm" && rating()}
       <img
         alt="dsf"
@@ -78,7 +84,9 @@ function Card({
         className={`absolute ${cardTagPosition[size]} flex justify-between w-full p-2 `}
       >
         <div>
-          <h2 className="text-xl font-bold text-white ">{name}</h2>
+          <h2 className="text-xl font-bold text-white ">
+            {name ? name : title}
+          </h2>
           <h2 className="text-xl text-white ">
             {first_air_date
               ? new Date(first_air_date).getFullYear().toString()

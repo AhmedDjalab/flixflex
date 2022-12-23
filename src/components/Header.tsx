@@ -14,17 +14,21 @@ function Header() {
     >
       <div>
         <ul className="flex gap-6 list-none ">
-          <li className="hover:text-white">Movies</li>
-          <li className="hover:text-white">Series</li>
+          <li className="cursor-pointer hover:text-white">
+            <NavLink to="/movies">Movies</NavLink>
+          </li>
+          <li className="cursor-pointer hover:text-white">
+            <NavLink to="/series">Series</NavLink>
+          </li>
         </ul>
       </div>
 
       {!user ? (
         <div className="flex justify-end flex-1 gap-6 ">
-          <NavLink className="hover:text-white" to="/login">
+          <NavLink className="cursor-pointer hover:text-white" to="/login">
             Login
           </NavLink>
-          <NavLink className="hover:text-white" to="/signup">
+          <NavLink className="cursor-pointer hover:text-white" to="/signup">
             Signup
           </NavLink>
         </div>

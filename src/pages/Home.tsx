@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import Avatar from "../components/Avatar";
 import Card from "../components/Card";
 import Logo from "../components/Logo";
