@@ -29,12 +29,6 @@ function Card({
   title,
   id,
 }: ICardProps) {
-  console.log(
-    "🚀 ~ file: Card.tsx:76 ~ first_air_date",
-    new Date(first_air_date).getFullYear(),
-    id
-  );
-
   const rating = () => {
     if (size === "md") {
       return <h2 className="text-white text-md "> {vote_average} rating </h2>;
