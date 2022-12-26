@@ -3,12 +3,23 @@ import React from "react";
 import { useQuery } from "react-query";
 import { APIResponse } from "../models/responses_types";
 import { getPopularMovies, seachMovies } from "../services/moviesServices";
+import { IPaginatedHook } from "./useMoviesPaginated";
 
-const useQueryFilter = (search = "", serverPage = 1, currentPage = 1) => {
+export interface IQueryFilerHook extends IPaginatedHook {
+  currentPage: number;
+  serverPage: number;
+}
+
+const useQueryFilter = ({
+  search = "",
+  serverPage = 1,
+  currentPage = 1,
+  type = "movie",
+}: IQueryFilerHook) => {
   if (search && search.length > 0) {
     return useQuery<APIResponse>(
-      [`searchMovies:${serverPage}:${currentPage}:${search}`, serverPage],
-      () => seachMovies(search, serverPage),
+      [`search${type}:${serverPage}:${currentPage}:${search}`, serverPage],
+      () => seachMovies({ type, search, pageParam: serverPage }),
       {
         keepPreviousData: true,
       }
@@ -16,8 +27,8 @@ const useQueryFilter = (search = "", serverPage = 1, currentPage = 1) => {
   }
 
   return useQuery<APIResponse>(
-    [`movies:${serverPage}:${currentPage}`, serverPage],
-    () => getPopularMovies(serverPage),
+    [`${type}s:${serverPage}:${currentPage}`, serverPage],
+    () => getPopularMovies({ pageParam: serverPage, type }),
     {
       keepPreviousData: true,
     }

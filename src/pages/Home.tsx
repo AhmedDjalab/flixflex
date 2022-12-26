@@ -14,12 +14,23 @@ function Home() {
     isLoading,
     isError,
     data: movies,
-  } = useQuery<APIResponse>("movies", () => getPopularMovies(1, 5));
+  } = useQuery<APIResponse>("movies", () =>
+    getPopularMovies({
+      pageParam: 1,
+      resultLength: 5,
+    })
+  );
   const {
     isLoading: isLoadingSeries,
     isError: isErrorSeries,
     data: series,
-  } = useQuery<APIResponse>("series", () => getPopularSeries(1, 5));
+  } = useQuery<APIResponse>("series", () =>
+    getPopularMovies({
+      pageParam: 1,
+      resultLength: 5,
+      type: "tv",
+    })
+  );
 
   if (isError || isErrorSeries)
     return (

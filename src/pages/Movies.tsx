@@ -33,7 +33,7 @@ function Movies() {
     isLoading: isMoviesLoading,
     currentPage,
     setCurrentPage,
-  } = useMoviesPaginated(search);
+  } = useMoviesPaginated({ search });
 
   useEffect(() => {
     if (currentPage % 2 === 1) setMoviesList(firstSlice);
@@ -59,15 +59,9 @@ function Movies() {
       searchRef.current!.value = e.currentTarget.value;
     }
     setTimeout(() => {
-      console.log("this is time work");
       setSearch(searchRef.current!.value);
     }, 800);
   };
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    console.log("this si loading ", isMoviesLoading);
-  }, [isMoviesLoading]);
 
   return isLoading || isMoviesLoading ? (
     <div className="flex flex-col items-center justify-center flex-1">

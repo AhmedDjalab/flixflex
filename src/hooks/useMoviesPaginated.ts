@@ -5,7 +5,12 @@ import { APIResponse, Result } from "../models/responses_types";
 import { getPopularMovies, seachMovies } from "../services/moviesServices";
 import useQueryFilter from "./useQueryFilter";
 
-const useMoviesPaginated = (search?: string) => {
+export interface IPaginatedHook {
+  search?: string;
+  type?: "movie" | "tv";
+}
+
+const useMoviesPaginated = ({ search, type = "movie" }: IPaginatedHook) => {
   const [firstSlice, setFirstSlice] = useState<Result[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [serverPage, setServerPage] = useState(1);
@@ -15,11 +20,12 @@ const useMoviesPaginated = (search?: string) => {
   //! for now the maximum of free usage is 500 records
   const [totalLength, setTotalLength] = useState<number>(0);
 
-  const { data, isLoading, isError } = useQueryFilter(
+  const { data, isLoading, isError } = useQueryFilter({
+    type,
     search,
     serverPage,
-    currentPage
-  );
+    currentPage,
+  });
 
   useEffect(() => {
     if (currentPage === 1) {

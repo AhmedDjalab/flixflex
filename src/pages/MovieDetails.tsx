@@ -8,6 +8,7 @@ import Logo from "../components/Logo";
 import { IMAGE_BASE_URL, IMAGE_BIG_SIZE, IMAGE_SIZE } from "../constant/const";
 import { Movie, VideoResult } from "../models/movie";
 import { Result } from "../models/responses_types";
+import { Serie } from "../models/serie";
 import { getMovieDetails } from "../services/moviesServices";
 
 {
@@ -42,9 +43,13 @@ function MovieDetails() {
     isLoading,
     isError,
     data: movie,
-  } = useQuery<Movie>(`movie:${id}`, () => getMovieDetails(id!), {
-    keepPreviousData: true,
-  });
+  } = useQuery<Movie>(
+    `movie:${id}`,
+    () => getMovieDetails<Movie>({ id: id! }),
+    {
+      keepPreviousData: true,
+    }
+  );
 
   useEffect(() => {
     if (movie && movie.videos && movie.videos.results) {
@@ -53,7 +58,6 @@ function MovieDetails() {
       );
       setTrailer(trailer ? trailer : movie.videos.results[0]);
     }
-    console.log("🚀 ~ file: MovieDetails.tsx:56 ~ useEffect ~ trailer", movie);
   }, [movie, trailer]);
 
   if (isError)
@@ -151,7 +155,9 @@ function MovieDetails() {
             </div>
             <div>
               <h2 className="font-bold text-red-500 text-md">Voting Average</h2>
-              <p className="text-white text-md">{movie!.vote_average * 10}%</p>
+              <p className="text-white text-md">
+                {(movie!.vote_average * 10).toFixed(2)}%
+              </p>
             </div>
             <div>
               <h2 className="font-bold text-red-500 text-md">Genres</h2>
