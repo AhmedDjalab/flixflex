@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import Logo from "../components/Logo";
 import Pagination from "../components/Pagination";
@@ -14,8 +15,10 @@ import {
 
 const recordPerPage = 10;
 function Movies() {
+  const navigate = useNavigate();
   const [moviesList, setMoviesList] = useState<Result[]>([]);
-
+  let [search, setSearch] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
   const {
     isLoading,
     isError,
@@ -30,51 +33,7 @@ function Movies() {
     isLoading: isMoviesLoading,
     currentPage,
     setCurrentPage,
-  } = useMoviesPaginated();
-
-  // const [moviesList, setMoviesList] = useState<Result[]>();
-
-  // useEffect(() => {
-  //   if (data?.results) {
-  //     console.log("🚀 ~ file: Movies.tsx:36 ~ useEffect ~ data", data);
-  //     let newData = [...data?.results];
-  //     setMoviesList(newData.slice(0, 10));
-  //     setFirstSlice(newData.slice(0, 10));
-  //     setSecondSlice(newData.slice(10));
-  //   }
-  // }, [data]);
-
-  // useEffect(() => {
-  //   let expectedServerPage = currentPage % 2;
-
-  //   if (
-  //     expectedServerPage === 1 &&
-  //     currentPage > 2 &&
-  //     currentPage > serverPage
-  //   ) {
-  //     console.log("this is new page to call from backend ");
-  //     setServerPage(serverPage + 1);
-  //   } else {
-  //     console.log("this is next slide  to call from frontend  ");
-  //     // it is one of the two slices
-  //     // 1 - 2
-  //     // 3 - 4
-  //     // 5 - 6
-  //     if (currentPage % 2 === 1) {
-  //       setMoviesList(firstSlice);
-  //       console.log(
-  //         "🚀 ~ file: Movies.tsx:67 ~ useEffect ~ firstSlice",
-  //         firstSlice
-  //       );
-  //     } else {
-  //       setMoviesList(secondSlice);
-  //       console.log(
-  //         "🚀 ~ file: Movies.tsx:69 ~ useEffect ~ secondSlice",
-  //         secondSlice
-  //       );
-  //     }
-  //   }
-  // }, [currentPage]);
+  } = useMoviesPaginated(search);
 
   useEffect(() => {
     if (currentPage % 2 === 1) setMoviesList(firstSlice);
@@ -91,7 +50,25 @@ function Movies() {
       </div>
     );
 
-  const handleClick = (id: number) => {};
+  const handleClick = (id: number) => {
+    navigate("/movies/" + id);
+  };
+  const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    // add debouncing
+    if (searchRef !== null) {
+      searchRef.current!.value = e.currentTarget.value;
+    }
+    setTimeout(() => {
+      console.log("this is time work");
+      setSearch(searchRef.current!.value);
+    }, 800);
+  };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    console.log("this si loading ", isMoviesLoading);
+  }, [isMoviesLoading]);
+
   return isLoading || isMoviesLoading ? (
     <div className="flex flex-col items-center justify-center flex-1">
       <Logo />
@@ -99,6 +76,17 @@ function Movies() {
     </div>
   ) : (
     <div className="m-4 ">
+      <div className="flex items-center justify-end flex-1">
+        <input
+          ref={searchRef}
+          type="text"
+          className="h-10 text-white textfield"
+          //value={search}
+          onChange={(e) => handleSearch(e)}
+          placeholder="title"
+        />
+      </div>
+
       {/* Trending Movies   */}
 
       {topRatedMovies?.results.length === 0 ? (
@@ -112,8 +100,9 @@ function Movies() {
       <br />
       <br />
       <br />
-      <div className="flex items-center justify-between mb-2 text-center ">
+      <div className="flex items-center justify-between mb-5 text-center ">
         <h2 className="font-bold text-white ">All Movies</h2>
+
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

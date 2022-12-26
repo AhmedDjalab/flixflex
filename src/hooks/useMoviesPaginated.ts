@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
+import { Total_Length } from "../constant/const";
 import { APIResponse, Result } from "../models/responses_types";
-import { getPopularMovies } from "../services/moviesServices";
+import { getPopularMovies, seachMovies } from "../services/moviesServices";
+import useQueryFilter from "./useQueryFilter";
 
-const useMoviesPaginated = () => {
+const useMoviesPaginated = (search?: string) => {
   const [firstSlice, setFirstSlice] = useState<Result[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [serverPage, setServerPage] = useState(1);
@@ -11,14 +13,12 @@ const useMoviesPaginated = () => {
   const [secondSlice, setSecondSlice] = useState<Result[]>([]);
   //! you will need this if you had a full primary access to TMDP API
   //! for now the maximum of free usage is 500 records
-  // const [totalLength, setTotalLength] = useState<number>(0);
+  const [totalLength, setTotalLength] = useState<number>(0);
 
-  const { isLoading, isError, data } = useQuery<APIResponse>(
-    [`movies:${serverPage}:${currentPage}`, serverPage],
-    () => getPopularMovies(serverPage),
-    {
-      keepPreviousData: true,
-    }
+  const { data, isLoading, isError } = useQueryFilter(
+    search,
+    serverPage,
+    currentPage
   );
 
   useEffect(() => {
@@ -36,7 +36,9 @@ const useMoviesPaginated = () => {
   const getData = useCallback(() => {
     if (data?.results !== undefined) {
       let newData = [...data?.results];
-      // setTotalLength(data.total_results);
+      setTotalLength(
+        data.total_results > Total_Length ? Total_Length : data.total_results
+      );
       setFirstSlice(newData.slice(0, 10));
       setSecondSlice(newData.slice(10));
     }

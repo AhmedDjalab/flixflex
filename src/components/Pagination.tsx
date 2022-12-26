@@ -44,7 +44,7 @@ IPaginationProps) => {
           if (currentPage !== 1) setCurrentPage(currentPage - 1);
         }}
         // disabled={currentPage === 1}
-        className="h-12 px-4 border-2 border-r-0 border-red-600 hover:bg-red-600 hover:text-white"
+        className="h-8 px-4 border-2 border-r-0 border-red-600 hover:bg-red-600 hover:text-white"
       >
         <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path
@@ -64,7 +64,7 @@ IPaginationProps) => {
           if (currentPage !== pages) setCurrentPage(currentPage + 1);
         }}
         // disabled={currentPage === pages}
-        className="h-12 px-4 border-2 border-r-0 border-red-600 hover:bg-red-600 hover:text-white"
+        className="h-8 px-4 border-2 border-r-0 border-red-600 hover:bg-red-600 hover:text-white"
       >
         <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path
@@ -78,10 +78,10 @@ IPaginationProps) => {
   };
 
   return (
-    <div className="flex bg-white rounded-lg font-[Poppins] ">
+    <div className="flex bg-white rounded-lg font-[Poppins] mb-2 ">
       <button
         onClick={() => setCurrentPage(1)}
-        className="h-12 px-4 border-2 border-r-0 border-red-600 rounded-l-lg hover:bg-red-600 hover:text-white"
+        className="h-8 px-4 border-2 border-r-0 border-red-600 rounded-l-lg hover:bg-red-600 hover:text-white"
         disabled={currentPage === 1}
       >
         <svg
@@ -106,7 +106,7 @@ IPaginationProps) => {
             e.preventDefault();
             setCurrentPage(pg);
           }}
-          className={`h-12 border-2 border-r-0 border-red-600
+          className={`h-8 border-2 border-r-0 border-red-600
                w-12 ${currentPage === pg && "bg-red-600 text-white"}`}
         >
           {pg}
@@ -115,7 +115,7 @@ IPaginationProps) => {
       {arrowPlus()}
       <button
         onClick={() => setCurrentPage(pages)}
-        className="h-12 px-4 border-2 border-red-600 rounded-r-lg hover:bg-red-600 hover:text-white"
+        className="h-8 px-4 border-2 border-red-600 rounded-r-lg hover:bg-red-600 hover:text-white"
         disabled={currentPage === pages}
       >
         <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
