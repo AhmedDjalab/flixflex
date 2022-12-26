@@ -89,7 +89,7 @@ function Series() {
           there is no data , please try after minute
         </h1>
       ) : (
-        <Trending data={topRatedSeries?.results} title="series" />
+        <Trending data={topRatedSeries?.results} title="Top Rated series" />
       )}
 
       <br />

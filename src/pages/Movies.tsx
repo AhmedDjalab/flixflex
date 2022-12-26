@@ -88,7 +88,7 @@ function Movies() {
           there is no data , please try after minute
         </h1>
       ) : (
-        <Trending data={topRatedMovies?.results} title="movies" />
+        <Trending data={topRatedMovies?.results} title="Top Rated movies" />
       )}
 
       <br />

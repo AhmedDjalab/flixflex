@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../services/firebase";
 import Avatar from "./Avatar";
+import Logo from "./Logo";
 function Header() {
   const [user] = useAuthState(auth);
 
@@ -14,6 +15,10 @@ function Header() {
     >
       <div>
         <ul className="flex gap-6 list-none ">
+          <NavLink to="/">
+            <Logo className="m-0 -mt-2" />
+          </NavLink>
+
           <li className="cursor-pointer hover:text-white">
             <NavLink to="/movies">Movies</NavLink>
           </li>

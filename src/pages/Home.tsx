@@ -48,9 +48,9 @@ function Home() {
   ) : (
     <div className="m-4">
       {/* Trending Movies   */}
-      <Trending data={movies?.results} title="movies" />
+      <Trending data={movies?.results} title="Trending movies" />
       {/* Trending Series*/}
-      <Trending data={series?.results} title="series" />
+      <Trending data={series?.results} title="Trending series" />
     </div>
   );
 }
