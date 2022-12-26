@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "../components/Avatar";
 import Card from "../components/Card";
 import Logo from "../components/Logo";
-import Trending from "../components/Trending";
+import Cards from "../components/Cards";
 import { API_URL } from "../constant/const";
 import { APIResponse } from "../models/responses_types";
 import { getPopularMovies, getPopularSeries } from "../services/moviesServices";
@@ -48,9 +48,9 @@ function Home() {
   ) : (
     <div className="m-4">
       {/* Trending Movies   */}
-      <Trending data={movies?.results} title="Trending movies" />
+      <Cards data={movies?.results} title="Trending movies" />
       {/* Trending Series*/}
-      <Trending data={series?.results} title="Trending series" />
+      <Cards data={series?.results} title="Trending series" />
     </div>
   );
 }

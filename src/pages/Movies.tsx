@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import Logo from "../components/Logo";
 import Pagination from "../components/Pagination";
-import Trending from "../components/Trending";
+import Cards from "../components/Cards";
 import { Total_Length } from "../constant/const";
 import useMoviesPaginated from "../hooks/useMoviesPaginated";
 import { APIResponse, Result } from "../models/responses_types";
@@ -88,7 +88,7 @@ function Movies() {
           there is no data , please try after minute
         </h1>
       ) : (
-        <Trending data={topRatedMovies?.results} title="Top Rated movies" />
+        <Cards data={topRatedMovies?.results} title="Top Rated movies" />
       )}
 
       <br />

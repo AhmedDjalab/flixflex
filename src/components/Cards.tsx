@@ -3,11 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { Result } from "../models/responses_types";
 import Card from "./Card";
 
-const Trending = ({ data, title }: any) => {
+export interface ICardsProps {
+  data: any;
+  title: string;
+}
+const Cards = ({ data, title }: ICardsProps) => {
   const navigate = useNavigate();
 
   const handleClick = (id: number) => {
-    if (title === "movies") {
+    if (title.includes("movies")) {
       navigate("/movies/" + id);
     } else {
       navigate("/series/" + id);
@@ -28,4 +32,4 @@ const Trending = ({ data, title }: any) => {
   );
 };
 
-export default Trending;
+export default Cards;

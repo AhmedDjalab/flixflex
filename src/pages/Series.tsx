@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import Logo from "../components/Logo";
 import Pagination from "../components/Pagination";
-import Trending from "../components/Trending";
+import Cards from "../components/Cards";
 import { Total_Length } from "../constant/const";
 import useMoviesPaginated from "../hooks/useMoviesPaginated";
 import { APIResponse, Result } from "../models/responses_types";
@@ -52,6 +52,7 @@ function Series() {
     );
 
   const handleClick = (id: number) => {
+    console.log("🚀 ~ file: Movies.tsx:54 ~ handleClick ~ id", id);
     navigate("/series/" + id);
   };
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
@@ -89,7 +90,7 @@ function Series() {
           there is no data , please try after minute
         </h1>
       ) : (
-        <Trending data={topRatedSeries?.results} title="Top Rated series" />
+        <Cards data={topRatedSeries?.results} title="Top Rated series" />
       )}
 
       <br />
