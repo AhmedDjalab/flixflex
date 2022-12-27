@@ -45,23 +45,23 @@ function Card({
       );
     }
   };
-  const watchButton = () => {
-    const btStyle = {
-      sm: "",
-      md: "bottom-6 right-2",
-    };
-    return (
-      <div
-        className={`
-          bg-[#811221] absolute bg-opacity-40  rounded-2xl align-middle	 w-[7rem] h-[2rem]
-        text-center text-white 
-          ${btStyle[size]}
-          `}
-      >
-        Watch now
-      </div>
-    );
-  };
+  // const watchButton = () => {
+  //   const btStyle = {
+  //     sm: "",
+  //     md: "bottom-6 right-2",
+  //   };
+  //   return (
+  //     <div
+  //       className={`
+  //         bg-[#811221] absolute bg-opacity-40  rounded-2xl align-middle	 w-[7rem] h-[2rem]
+  //       text-center text-white
+  //         ${btStyle[size]}
+  //         `}
+  //     >
+  //       Watch now
+  //     </div>
+  //   );
+  // };
   return (
     <div
       onClick={() => handleClickCard(id)}
@@ -86,7 +86,7 @@ function Card({
               ? new Date(first_air_date).getFullYear().toString()
               : new Date(release_date).getFullYear().toString()}
           </h2>
-          {size === "md" ? (
+          {size === "md" && (
             <div className="flex items-center gap-1">
               <img
                 src={IMDBICON}
@@ -95,11 +95,8 @@ function Card({
               />
               {rating()}
             </div>
-          ) : (
-            watchButton()
           )}
         </div>
-        {size === "md" && watchButton()}
       </div>
     </div>
   );

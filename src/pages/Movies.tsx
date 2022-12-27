@@ -12,6 +12,7 @@ import {
   getPopularMovies,
   getTopRatedMovies,
 } from "../services/moviesServices";
+import Search from "../components/Search";
 
 const recordPerPage = 10;
 function Movies() {
@@ -70,16 +71,8 @@ function Movies() {
     </div>
   ) : (
     <div className="m-4 ">
-      <div className="flex items-center justify-end flex-1">
-        <input
-          ref={searchRef}
-          type="text"
-          className="h-10 text-white textfield"
-          //value={search}
-          onChange={(e) => handleSearch(e)}
-          placeholder="title"
-        />
-      </div>
+   
+      <Search searchRef={searchRef} handleSearch={handleSearch} />
 
       {/* Trending Movies   */}
 
@@ -94,7 +87,7 @@ function Movies() {
       <br />
       <br />
       <br />
-      <div className="flex items-center justify-between mb-5 text-center ">
+      <div className="flex flex-col items-center justify-between gap-2 mb-5 text-center md:flex-row">
         <h2 className="font-bold text-white ">All Movies</h2>
 
         <Pagination
@@ -104,7 +97,7 @@ function Movies() {
         />
       </div>
       {
-        <div className="flex flex-col flex-wrap items-center gap-2 md:flex-row md:justify-evenly">
+        <div className="flex flex-col flex-wrap items-center gap-4 md:flex-row md:justify-evenly">
           {moviesList.map((mv: Result) => (
             <Card size="sm" key={mv.id} {...mv} handleClickCard={handleClick} />
           ))}

@@ -7,7 +7,7 @@
     .textfield {
 
     
-        @apply w-[21.8rem] h-[4rem] px-2 text-lg bg-bodyColor  border-2
+        @apply md:w-[21.8rem] w-[15rem] h-[4rem] px-2   text-lg bg-bodyColor  border-2
         border-white rounded-lg
       }
 

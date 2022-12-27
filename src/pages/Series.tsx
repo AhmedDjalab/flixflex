@@ -13,6 +13,7 @@ import {
   getTopRatedMovies,
   getTopRatedSeries,
 } from "../services/moviesServices";
+import Search from "../components/Search";
 
 const recordPerPage = 10;
 function Series() {
@@ -52,7 +53,6 @@ function Series() {
     );
 
   const handleClick = (id: number) => {
-    console.log("🚀 ~ file: Movies.tsx:54 ~ handleClick ~ id", id);
     navigate("/series/" + id);
   };
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
@@ -72,16 +72,7 @@ function Series() {
     </div>
   ) : (
     <div className="m-4 ">
-      <div className="flex items-center justify-end flex-1">
-        <input
-          ref={searchRef}
-          type="text"
-          className="h-10 text-white textfield"
-          //value={search}
-          onChange={(e) => handleSearch(e)}
-          placeholder="title"
-        />
-      </div>
+      <Search searchRef={searchRef} handleSearch={handleSearch} />
 
       {/* Trending Movies   */}
 
@@ -96,7 +87,7 @@ function Series() {
       <br />
       <br />
       <br />
-      <div className="flex items-center justify-between mb-5 text-center ">
+      <div className="flex flex-col items-center justify-between gap-2 mb-5 text-center md:flex-row ">
         <h2 className="font-bold text-white ">All Series</h2>
 
         <Pagination

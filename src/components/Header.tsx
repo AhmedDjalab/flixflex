@@ -14,9 +14,9 @@ function Header() {
     "
     >
       <div>
-        <ul className="flex gap-6 list-none ">
+        <ul className="flex gap-3 list-none md:gap-6">
           <NavLink to="/">
-            <Logo className="m-0 -mt-2" />
+            <Logo className="m-0 -mt-1 md:-mt-2" />
           </NavLink>
 
           <li className="cursor-pointer hover:text-white">
@@ -29,7 +29,7 @@ function Header() {
       </div>
 
       {!user ? (
-        <div className="flex justify-end flex-1 gap-6 ">
+        <div className="flex justify-end flex-1 gap-2 md:gap-6 ">
           <NavLink className="cursor-pointer hover:text-white" to="/login">
             Login
           </NavLink>

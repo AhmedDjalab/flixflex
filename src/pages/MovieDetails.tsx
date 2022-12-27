@@ -1,14 +1,11 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import YouTube from "react-youtube";
 import Logo from "../components/Logo";
-import { IMAGE_BASE_URL, IMAGE_BIG_SIZE, IMAGE_SIZE } from "../constant/const";
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "../constant/const";
 import { Movie, VideoResult } from "../models/movie";
-import { Result } from "../models/responses_types";
-import { Serie } from "../models/serie";
 import { getMovieDetails } from "../services/moviesServices";
 
 function MovieDetails() {
@@ -78,7 +75,7 @@ function MovieDetails() {
       />
     </>
   ) : (
-    <div className="flex gap-2 mx-8 mt-5">
+    <div className="flex flex-col gap-2 mx-8 mt-5 md:flex-row">
       <img
         src={`${IMAGE_BASE_URL + IMAGE_SIZE + movie?.poster_path}`}
         alt={movie?.title}
@@ -87,8 +84,18 @@ function MovieDetails() {
 
       <div className="flex flex-col gap-10 mx-8">
         <h2 className="text-3xl font-bold text-red-500">{movie?.title}</h2>
+        <div
+          className={`
+          bg-[#811221]  bg-opacity-40  rounded-2xl align-middle	 w-[7rem] h-[2rem]
+        text-center text-white font-bold cursor-pointer
+         
+          `}
+          onClick={() => setPlaying(true)}
+        >
+          Trailer
+        </div>
         <p className="text-lg text-white">{movie?.overview}</p>
-        <div className="flex justify-around flex-1">
+        <div className="flex flex-1 gap-2 md:justify-around">
           {/* left side  */}
           <div className="flex flex-col gap-5">
             <div>
@@ -151,17 +158,6 @@ function MovieDetails() {
               </p>
             </div>
           </div>
-        </div>
-
-        <div
-          className={`
-          bg-[#811221]  bg-opacity-40  rounded-2xl align-middle	 w-[7rem] h-[2rem]
-        text-center text-white font-bold cursor-pointer
-         
-          `}
-          onClick={() => setPlaying(true)}
-        >
-          Trailer
         </div>
       </div>
     </div>
