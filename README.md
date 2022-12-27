@@ -2,16 +2,17 @@
 
 ## _A movies and series site_
 
-Flix Flex is a website, for getting latest movies and series , with details and trailers , powerd by TMDB API , and React .
+Flix Flex is a website, for getting latest movies and series , with details and trailers , powered by TMDB API , and React .
 
 [Demo Link](https://flixflex.djaalabahmed.com/)
 
 ## Features
 
 - Authorization with firebase hooks
-- powored with TMDB API
+- powered with TMDB API
 - React + Typescript
 - React Query
+- Tailwind CSS
 
 ## Available Scripts
 
