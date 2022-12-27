@@ -5,8 +5,8 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Logo from "../components/Logo";
 import { IMAGE_BASE_URL, IMAGE_SIZE } from "../constant/const";
-import { Movie, VideoResult } from "../models/movie";
-import { getMovieDetails } from "../services/moviesServices";
+import { Movie, VideoResult } from "../types/movie";
+import { getDetails } from "../services/api_services";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -16,13 +16,9 @@ function MovieDetails() {
     isLoading,
     isError,
     data: movie,
-  } = useQuery<Movie>(
-    `movie:${id}`,
-    () => getMovieDetails<Movie>({ id: id! }),
-    {
-      keepPreviousData: true,
-    }
-  );
+  } = useQuery<Movie>(`movie:${id}`, () => getDetails<Movie>({ id: id! }), {
+    keepPreviousData: true,
+  });
 
   useEffect(() => {
     if (movie && movie.videos && movie.videos.results) {
@@ -144,7 +140,7 @@ function MovieDetails() {
             </div>
             <div>
               <h2 className="font-bold text-red-500 text-md">Genres</h2>
-              <p className="flex gap-2 text-white text-md">
+              <p className="flex flex-col gap-2 text-white text-md">
                 {movie?.genres
                   ? movie?.genres.map((genre) => (
                       <span

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import { Total_Length } from "../constant/const";
-import { APIResponse, Result } from "../models/responses_types";
-import { getPopularMovies, seachMovies } from "../services/moviesServices";
+import { APIResponse, Result } from "../types/responses_types";
+import { getPopularData, seachData } from "../services/api_services";
 import useQueryFilter from "./useQueryFilter";
 
 export interface IPaginatedHook {
@@ -10,7 +10,7 @@ export interface IPaginatedHook {
   type?: "movie" | "tv";
 }
 
-const useMoviesPaginated = ({ search, type = "movie" }: IPaginatedHook) => {
+const useDataPaginated = ({ search, type = "movie" }: IPaginatedHook) => {
   const [firstSlice, setFirstSlice] = useState<Result[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [serverPage, setServerPage] = useState(1);
@@ -63,4 +63,4 @@ const useMoviesPaginated = ({ search, type = "movie" }: IPaginatedHook) => {
   };
 };
 
-export default useMoviesPaginated;
+export default useDataPaginated;

@@ -5,9 +5,9 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Logo from "../components/Logo";
 import { IMAGE_BASE_URL, IMAGE_SIZE } from "../constant/const";
-import { VideoResult } from "../models/movie";
-import { Serie } from "../models/serie";
-import { getMovieDetails } from "../services/moviesServices";
+import { VideoResult } from "../types/movie";
+import { Serie } from "../types/serie";
+import { getDetails } from "../services/api_services";
 
 function SerieDetails() {
   const { id } = useParams();
@@ -19,7 +19,7 @@ function SerieDetails() {
     data: movie,
   } = useQuery<Serie>(
     `serie:${id}`,
-    () => getMovieDetails<Serie>({ id: id!, type: "tv" }),
+    () => getDetails<Serie>({ id: id!, type: "tv" }),
     {
       keepPreviousData: true,
     }

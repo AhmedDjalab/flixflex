@@ -6,13 +6,13 @@ import Logo from "../components/Logo";
 import Pagination from "../components/Pagination";
 import Cards from "../components/Cards";
 import { Total_Length } from "../constant/const";
-import useMoviesPaginated from "../hooks/useMoviesPaginated";
-import { APIResponse, Result } from "../models/responses_types";
+import useDataPaginated from "../hooks/useMoviesPaginated";
+import { APIResponse, Result } from "../types/responses_types";
 import {
-  getPopularMovies,
+  getPopularData,
   getTopRatedMovies,
   getTopRatedSeries,
-} from "../services/moviesServices";
+} from "../services/api_services";
 import Search from "../components/Search";
 
 const recordPerPage = 10;
@@ -35,7 +35,7 @@ function Series() {
     isLoading: isSeriessLoading,
     currentPage,
     setCurrentPage,
-  } = useMoviesPaginated({ search, type: "tv" });
+  } = useDataPaginated({ search, type: "tv" });
 
   useEffect(() => {
     if (currentPage % 2 === 1) setSeriesList(firstSlice);

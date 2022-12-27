@@ -6,8 +6,8 @@ import Card from "../components/Card";
 import Logo from "../components/Logo";
 import Cards from "../components/Cards";
 import { API_URL } from "../constant/const";
-import { APIResponse } from "../models/responses_types";
-import { getPopularMovies, getPopularSeries } from "../services/moviesServices";
+import { APIResponse } from "../types/responses_types";
+import { getPopularData, getPopularSeries } from "../services/api_services";
 
 function Home() {
   const {
@@ -15,7 +15,7 @@ function Home() {
     isError,
     data: movies,
   } = useQuery<APIResponse>("movies", () =>
-    getPopularMovies({
+    getPopularData({
       pageParam: 1,
       resultLength: 5,
     })
@@ -25,7 +25,7 @@ function Home() {
     isError: isErrorSeries,
     data: series,
   } = useQuery<APIResponse>("series", () =>
-    getPopularMovies({
+    getPopularData({
       pageParam: 1,
       resultLength: 5,
       type: "tv",

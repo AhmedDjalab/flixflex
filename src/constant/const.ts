@@ -1,3 +1,5 @@
+//! for propose only we share keys here , in other situation you
+//! get to use env variables
 export const API_URL = "https://api.themoviedb.org/3/";
 export const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/";
 export const IMAGE_SIZE = "w533_and_h300_bestv2";

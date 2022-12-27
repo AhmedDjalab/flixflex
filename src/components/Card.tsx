@@ -1,7 +1,7 @@
 import React from "react";
 import IMDBICON from "../assets/icons/imdb.png";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
-import { Result } from "../models/responses_types";
+import { Result } from "../types/responses_types";
 import { API_URL, IMAGE_BASE_URL, IMAGE_SIZE } from "../constant/const";
 
 interface ICardProps extends Result {

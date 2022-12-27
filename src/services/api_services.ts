@@ -1,8 +1,8 @@
 import axios from "axios";
 import { API_URL, AUTH_TOKEN } from "../constant/const";
-import { Movie } from "../models/movie";
-import { APIResponse, Result } from "../models/responses_types";
-import { Serie } from "../models/serie";
+import { Movie } from "../types/movie";
+import { APIResponse, Result } from "../types/responses_types";
+import { Serie } from "../types/serie";
 
 axios.defaults.baseURL = API_URL;
 axios.defaults.headers.common["Authorization"] = `bearer ${AUTH_TOKEN}`;
@@ -19,24 +19,18 @@ export interface IDetailedProps {
   type?: "movie" | "tv";
 }
 
-export const getPopularMovies = async ({
+export const getPopularData = async ({
   pageParam = 1,
   resultLength = 0,
   type = "movie",
 }: ISearchProps) => {
-  // 1 ---> 1
-  //2  ---< 1
-  // 3 ---> 2
-
-  // 5 ---> 3
-
   const result = await axios(`/${type}/popular?page=${pageParam}`);
   if (resultLength === 0) return result.data;
   const data = result.data as APIResponse;
   data.results = [...data.results.slice(0, resultLength)];
   return data;
 };
-export const seachMovies = async ({
+export const seachData = async ({
   type = "movie",
   search = "",
   pageParam = 1,
@@ -73,10 +67,7 @@ export const getTopRatedSeries = async (pageParam = 1, resultLength = 0) => {
   data.results = [...data.results.slice(0, resultLength)];
   return data;
 };
-export const getMovieDetails = async <T>({
-  id,
-  type = "movie",
-}: IDetailedProps) => {
+export const getDetails = async <T>({ id, type = "movie" }: IDetailedProps) => {
   const result = await axios(`/${type}/${id}?append_to_response=videos`);
 
   const data = result.data as T;
@@ -84,4 +75,8 @@ export const getMovieDetails = async <T>({
   return data;
 };
 
-export default { getPopularMovies, getPopularSeries, seachMovies };
+export default {
+  getPopularData,
+  getPopularSeries,
+  seachData,
+};

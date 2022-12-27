@@ -6,12 +6,9 @@ import Logo from "../components/Logo";
 import Pagination from "../components/Pagination";
 import Cards from "../components/Cards";
 import { Total_Length } from "../constant/const";
-import useMoviesPaginated from "../hooks/useMoviesPaginated";
-import { APIResponse, Result } from "../models/responses_types";
-import {
-  getPopularMovies,
-  getTopRatedMovies,
-} from "../services/moviesServices";
+import useDataPaginated from "../hooks/useMoviesPaginated";
+import { APIResponse, Result } from "../types/responses_types";
+import { getPopularData, getTopRatedMovies } from "../services/api_services";
 import Search from "../components/Search";
 
 const recordPerPage = 10;
@@ -34,7 +31,7 @@ function Movies() {
     isLoading: isMoviesLoading,
     currentPage,
     setCurrentPage,
-  } = useMoviesPaginated({ search });
+  } = useDataPaginated({ search });
 
   useEffect(() => {
     if (currentPage % 2 === 1) setMoviesList(firstSlice);
@@ -71,7 +68,6 @@ function Movies() {
     </div>
   ) : (
     <div className="m-4 ">
-   
       <Search searchRef={searchRef} handleSearch={handleSearch} />
 
       {/* Trending Movies   */}

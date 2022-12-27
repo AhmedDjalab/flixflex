@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { useQuery } from "react-query";
-import { APIResponse } from "../models/responses_types";
-import { getPopularMovies, seachMovies } from "../services/moviesServices";
+import { APIResponse } from "../types/responses_types";
+import { getPopularData, seachData } from "../services/api_services";
 import { IPaginatedHook } from "./useMoviesPaginated";
 
 export interface IQueryFilerHook extends IPaginatedHook {
@@ -19,7 +19,7 @@ const useQueryFilter = ({
   if (search && search.length > 0) {
     return useQuery<APIResponse>(
       [`search${type}:${serverPage}:${currentPage}:${search}`, serverPage],
-      () => seachMovies({ type, search, pageParam: serverPage }),
+      () => seachData({ type, search, pageParam: serverPage }),
       {
         keepPreviousData: true,
       }
@@ -28,7 +28,7 @@ const useQueryFilter = ({
 
   return useQuery<APIResponse>(
     [`${type}s:${serverPage}:${currentPage}`, serverPage],
-    () => getPopularMovies({ pageParam: serverPage, type }),
+    () => getPopularData({ pageParam: serverPage, type }),
     {
       keepPreviousData: true,
     }

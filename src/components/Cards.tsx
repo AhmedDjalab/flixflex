@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Result } from "../models/responses_types";
+import { Result } from "../types/responses_types";
 import Card from "./Card";
 
 export interface ICardsProps {
